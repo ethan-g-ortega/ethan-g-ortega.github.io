@@ -1,0 +1,14 @@
+YOUR WEBSITE
+
+Start with content.js. It contains your bio, career entries, books, travel photos, video path, email and profile links. Edit the quoted text and save. Keep the surrounding quotes, commas and brackets.
+
+BOOKS: replace the starter entry in books. Add entries using the commented example.
+TRAVEL: put images in media/. Set image to "media/your-photo.jpg", then edit name and caption. Add more place objects for more photos.
+DRUMMING: put your MP4 in media/ and set drummingVideo to "media/drumming.mp4". A direct HTTPS MP4/WebM URL also works. A YouTube watch-page URL is not a direct video file.
+PROJECTS AND HEADLINES: edit index.html. Each project is an <article>. All three currently say Under construction.
+COLORS AND LAYOUT: edit style.css. The colors are at the top.
+
+PREVIEW: Open index.html in your browser. No installation or build step is required.
+PUBLISH: Commit changes to the main branch of ethan-g-ortega/ethan-g-ortega.github.io. GitHub Pages automatically republishes. You can edit content.js directly on GitHub with the pencil button, then commit your changes.
+
+The empty travel, book and video areas are intentional: no destinations, reading history or personal media were invented. The career content is based on the supplied resume.
