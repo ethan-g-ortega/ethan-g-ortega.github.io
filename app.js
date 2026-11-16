@@ -9,9 +9,12 @@ function selectCareer(index, focus = false) {
   const c = content.career[index], panel = document.querySelector('#career-detail');
   panel.replaceChildren(); panel.setAttribute('aria-labelledby', `career-${index}`);
   panel.append(el('div', `GET ${c.path}`, 'method'), el('h3', c.company), el('p', c.role), el('div', c.dates, 'small'), el('p', c.summary));
-  const results = el('div', undefined, 'result');
-  c.result.split('\n').forEach(line => results.append(el('div', `✓ ${line}`)));
-  panel.append(results, el('p', c.stack, 'small'));
+  if(c.metrics){const metrics=el('div',undefined,'career-metrics');c.metrics.forEach(([value,label])=>{const m=el('div');m.append(el('strong',value),el('span',label));metrics.append(m);});panel.append(metrics);}
+  const highlights=el('div',undefined,'career-highlights');
+  (c.highlights||[]).forEach(([title,body])=>{const item=el('section',undefined,'career-highlight');item.append(el('h4',title),el('p',body));highlights.append(item);});
+  panel.append(highlights);
+  if(c.story){const details=el('details',undefined,'career-story');details.append(el('summary',c.storyTitle),el('p',c.story));panel.append(details);}
+  panel.append(el('p', c.stack, 'small'));
   if(focus) tabs.children[index].focus();
 }
 content.career.forEach((c, i) => { const b = el('button', `${String(i+1).padStart(2,'0')}  ${c.company}`, 'trace-tab'); b.id = `career-${i}`; b.setAttribute('role','tab'); b.setAttribute('aria-controls','career-detail'); b.append(el('span','↗')); b.onclick = () => selectCareer(i); b.onkeydown = e => { let next = i; if(e.key==='ArrowDown'||e.key==='ArrowRight') next=(i+1)%content.career.length; else if(e.key==='ArrowUp'||e.key==='ArrowLeft') next=(i-1+content.career.length)%content.career.length; else if(e.key==='Home') next=0; else if(e.key==='End') next=content.career.length-1; else return; e.preventDefault(); selectCareer(next,true); }; tabs.append(b); });
