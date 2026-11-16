@@ -26,30 +26,3 @@ const contact=document.querySelector('#contact-links');
 if(content.email){const a=el('a','Say hello ↗');a.href=`mailto:${content.email}`;contact.append(a);}
 for(const key of ['github','linkedin']){if(content[key] && safeURL(content[key])){const a=el('a',key==='github'?'GitHub ↗':'LinkedIn ↗');a.href=safeURL(content[key]);contact.append(a);}}
 
-// A tiny, opt-in acoustic sketch. No audio files or autoplay.
-let audioContext;
-document.querySelectorAll('[data-sound]').forEach(button => {
-  button.addEventListener('click', async () => {
-    try {
-      audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
-      await audioContext.resume();
-      const ctx = audioContext, t = ctx.currentTime, kind = button.dataset.sound;
-      const gain = ctx.createGain(); gain.connect(ctx.destination);
-      if(kind === 'kick') {
-        const osc = ctx.createOscillator(); osc.frequency.setValueAtTime(145,t); osc.frequency.exponentialRampToValueAtTime(45,t+.2);
-        gain.gain.setValueAtTime(.45,t); gain.gain.exponentialRampToValueAtTime(.001,t+.3);
-        osc.connect(gain); osc.start(t); osc.stop(t+.31);
-      } else {
-        const duration = kind === 'hat' ? .07 : .17;
-        const buffer = ctx.createBuffer(1,Math.ceil(ctx.sampleRate*duration),ctx.sampleRate);
-        const data = buffer.getChannelData(0); for(let i=0;i<data.length;i++) data[i]=Math.random()*2-1;
-        const source=ctx.createBufferSource();source.buffer=buffer;
-        const filter=ctx.createBiquadFilter();filter.type='highpass';filter.frequency.value=kind==='hat'?7000:1100;
-        source.connect(filter);filter.connect(gain);gain.gain.setValueAtTime(kind==='hat'?.13:.23,t);gain.gain.exponentialRampToValueAtTime(.001,t+duration);
-        source.start(t); source.stop(t+duration);
-      }
-      button.classList.add('hit'); setTimeout(()=>button.classList.remove('hit'),120);
-      document.querySelector('#sound-note').textContent = `${button.querySelector('b').textContent}. Your turn to find the groove.`;
-    } catch { document.querySelector('#sound-note').textContent = 'Audio isn’t available in this browser.'; }
-  });
-});
