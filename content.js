@@ -13,7 +13,8 @@ window.SITE_CONTENT = {
   places: [
     { name: "Chiang Mai, Thailand — Sticky Falls", image: "media/travel-forest-original.jpeg", caption: "", orientation: "portrait" },
     { name: "Krabi, Thailand", image: "media/travel-boat-original.jpeg", caption: "", orientation: "sideways" },
-    { name: "New york!", image: "media/newyork.JPG", caption: "", orientation: "portrait" }
+    { name: "New york!", image: "media/newyork.JPG", caption: "", orientation: "portrait" },
+    { name: "The Strokes in Philly!", image: "media/the-strokes-philly.jpg", caption: "", orientation: "portrait" }
     // Replace with { name: "Place name", image: "media/trip.jpg", caption: "Your memory" }
   ],
   // A local MP4/WebM path or direct HTTPS video URL. Leave blank for the placeholder.
