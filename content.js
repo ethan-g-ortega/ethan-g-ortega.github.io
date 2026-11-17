@@ -11,13 +11,13 @@ window.SITE_CONTENT = {
     // Example: , { title: "Your book title", author: "Author name", note: "What stayed with you." }
   ],
   places: [
-    { name: "Chiang Mai — Sticky Falls", image: "media/travel-forest-original.jpeg", caption: "", orientation: "portrait" },
-    { name: "Krabi", image: "media/travel-boat-original.jpeg", caption: "", orientation: "sideways" }
+    { name: "Chiang Mai, Thailand — Sticky Falls", image: "media/travel-forest-original.jpeg", caption: "", orientation: "portrait" },
+    { name: "Krabi, Thailand", image: "media/travel-boat-original.jpeg", caption: "", orientation: "sideways" }
     // Replace with { name: "Place name", image: "media/trip.jpg", caption: "Your memory" }
   ],
   // A local MP4/WebM path or direct HTTPS video URL. Leave blank for the placeholder.
-  drummingVideo: "",
-  videoCaption: "Behind the kit — a session from me",
+  drummingVideo: "media/drums-please-ethan.mp4",
+  videoCaption: "first drum recital 3 months into learning drums!",
   career: [
   {
     "company": "PAM",
