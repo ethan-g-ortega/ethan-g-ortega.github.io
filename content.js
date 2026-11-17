@@ -7,8 +7,8 @@ window.SITE_CONTENT = {
   github: "https://github.com/ethan-g-ortega",
   linkedin: "",
   books: [
-    { title: "Life 3.0", author: "Max Tegmark", cover: "media/life-3-0.png", note: "I read this when I was 15, fascinated by the world AI could bring. It’s the book that got me into computer science and software engineering." },
-    { title: "The Obstacle Is the Way", author: "Ryan Holiday", cover: "media/the-obstacle-is-the-way.png", note: "I read this when I was younger, and it became a pivotal book in my life. It taught me to turn failures and hardships into opportunities." }
+    { title: "Life 3.0", author: "Max Tegmark", cover: "media/life-3-0.png", note: "This book was genuinely life-changing. It’s what pushed me to major in Computer Science. I read it in 2019 when I was 15, and when the pandemic hit in 2020, I tested out of high school to pursue Computer Science at RCC. I loved the opening tale of the Omega Team and the explorations of hypothetical futures that followed." },
+    { title: "The Obstacle Is the Way", author: "Ryan Holiday", cover: "media/the-obstacle-is-the-way.png", note: "This book still rings through my head today. Anytime I face a hardship, I repeat to myself, “The obstacle is the way.” I’ve kept up with Ryan Holiday’s work ever since and find inspiration in every new release. In summary, Marcus Aurelius was that guy." }
   ],
   places: [
     { name: "Chiang Mai, Thailand — Sticky Falls", image: "media/travel-forest-original.jpeg", caption: "", orientation: "portrait" },
