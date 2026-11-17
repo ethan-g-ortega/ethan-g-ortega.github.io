@@ -11,8 +11,8 @@ window.SITE_CONTENT = {
     // Example: , { title: "Your book title", author: "Author name", note: "What stayed with you." }
   ],
   places: [
-    { name: "A story goes here", image: "", caption: "Travel photos coming soon" },
-    { name: "And another here", image: "", caption: "More memories to add" }
+    { name: "Among the trees", image: "media/travel-forest-original.jpeg", caption: "", orientation: "portrait" },
+    { name: "Out on the water", image: "media/travel-boat-original.jpeg", caption: "", orientation: "sideways" }
     // Replace with { name: "Place name", image: "media/trip.jpg", caption: "Your memory" }
   ],
   // A local MP4/WebM path or direct HTTPS video URL. Leave blank for the placeholder.
