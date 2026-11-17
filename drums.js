@@ -5,6 +5,31 @@
   const pads=[...document.querySelectorAll('[data-drum]')];
   let ctx, master, noise, clock, beat=0, running=false, next=0;
   const keys={KeyF:'snare',KeyJ:'hat',KeyK:'open',KeyR:'high',KeyU:'low',KeyE:'crash',KeyI:'ride',Space:'kick'};
+  const secret=['kick','hat','snare','hat','open','snare'];
+  let recent=[], lastHit=0;
+  const encore=document.createElement('div');
+  encore.className='kit-encore';encore.hidden=true;
+  encore.innerHTML='<div class="encore-header"><div><span class="eyebrow">SECRET TRACK UNLOCKED</span><h3>The Adults Are Talking</h3><p>The Strokes · You found the groove.</p></div><button type="button">Close player</button></div><div class="encore-player"></div><p class="small">If playback doesn’t start, press play. <a href="https://www.youtube.com/watch?v=ewOPQZZn4SY" target="_blank" rel="noopener noreferrer">Listen on YouTube ↗</a></p>';
+  room.after(encore);
+  encore.querySelector('button').addEventListener('click',()=>{encore.querySelector('.encore-player').replaceChildren();encore.hidden=true;recent=[];room.focus({preventScroll:true});});
+  function trackHit(kind){
+    const now=performance.now();
+    if(now-lastHit>4000)recent=[];
+    lastHit=now;recent.push(kind);recent=recent.slice(-secret.length);
+    if(recent.length!==secret.length||!recent.every((hit,i)=>hit===secret[i]))return;
+    recent=[];
+    if(!encore.hidden)return;
+    stop();
+    const player=document.createElement('iframe');
+    player.title='The Strokes — The Adults Are Talking (official video)';
+    player.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+    player.referrerPolicy='strict-origin-when-cross-origin';
+    player.src='https://www.youtube-nocookie.com/embed/ewOPQZZn4SY?autoplay=1&playsinline=1';
+    encore.querySelector('.encore-player').replaceChildren(player);
+    encore.hidden=false;
+    status.textContent='Secret track unlocked: The Adults Are Talking by The Strokes.';
+    encore.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
   async function ready(){
     if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=Number(volume.value)/100*.7;const limiter=ctx.createDynamicsCompressor();master.connect(limiter);limiter.connect(ctx.destination);noise=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate);const a=noise.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=Math.random()*2-1;}
     if(ctx.state!=='running') await ctx.resume();
@@ -14,7 +39,7 @@
   }
   function hiss(duration,level,freq,t){const src=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),g=ctx.createGain();src.buffer=noise;filter.type='highpass';filter.frequency.value=freq;g.gain.setValueAtTime(level,t);g.gain.exponentialRampToValueAtTime(.001,t+duration);src.connect(filter);filter.connect(g);g.connect(master);src.start(t);src.stop(t+duration);src.onended=()=>{src.disconnect();filter.disconnect();g.disconnect();};}
   function sound(kind,t){switch(kind){case 'kick':tone(160,43,.38,.9,t);hiss(.018,.1,2200,t);break;case 'snare':tone(190,100,.14,.25,t,'triangle');hiss(.19,.55,1300,t);break;case 'high':tone(260,115,.29,.65,t);break;case 'low':tone(170,65,.43,.7,t);break;case 'hat':hiss(.055,.31,7500,t);tone(6200,6000,.04,.035,t,'square');break;case 'open':hiss(.42,.33,6500,t);break;case 'crash':hiss(1.25,.43,2800,t);[311,503,727,1093].forEach(f=>tone(f,f*.98,.8,.035,t,'square'));break;case 'ride':hiss(.6,.16,6000,t);[2100,3350,4770].forEach(f=>tone(f,f,.55,.06,t));break;}}
-  async function hit(kind){try{await ready();sound(kind,ctx.currentTime);const p=pads.find(p=>p.dataset.drum===kind);p.classList.remove('hit');void p.offsetWidth;p.classList.add('hit');setTimeout(()=>p.classList.remove('hit'),130);status.textContent=p.querySelector('strong').textContent+' — keep it going.';}catch{status.textContent='Audio unavailable. Try a browser with Web Audio support.';}}
+  async function hit(kind){trackHit(kind);try{await ready();sound(kind,ctx.currentTime);const p=pads.find(p=>p.dataset.drum===kind);p.classList.remove('hit');void p.offsetWidth;p.classList.add('hit');setTimeout(()=>p.classList.remove('hit'),130);status.textContent=p.querySelector('strong').textContent+' — keep it going.';}catch{status.textContent='Audio unavailable. Try a browser with Web Audio support.';}}
   pads.forEach(p=>{p.addEventListener('pointerdown',e=>{if(e.button!==0)return;e.preventDefault();p.focus({preventScroll:true});hit(p.dataset.drum);});p.addEventListener('click',e=>{if(e.detail===0)hit(p.dataset.drum);});});
   room.addEventListener('pointerdown',e=>{if(!e.target.closest('button,input,label'))room.focus({preventScroll:true});});
   room.addEventListener('keydown',e=>{

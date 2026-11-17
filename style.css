@@ -30,3 +30,13 @@ body,.hero{background-color:#292929}header{border-bottom-color:#555}.brand{color
 /* Books with personal notes and the original supplied covers. */
 .book{display:grid;grid-template-columns:82px minmax(0,1fr);gap:18px;padding:24px 0;align-items:start}.book-cover{width:100%;height:auto;display:block;box-shadow:3px 4px 7px #0003}.book-details h4{font:700 17px/1.3 Arial,sans-serif;margin:5px 0 5px;color:#222}.reading .book-author{font:11px/1.5 monospace;color:#606060;margin-bottom:12px}.reading .book-note{font:13px/1.8 Arial,sans-serif;color:#333}.reading .book-num{font-size:10px}.personal-grid .reading>p{color:#555}.reading:after{content:'a few pages can change the direction.';font-size:10px;line-height:1.6}@media(min-width:901px){.personal-grid{grid-template-columns:1fr 1.15fr;gap:45px}}@media(max-width:400px){.book{grid-template-columns:68px minmax(0,1fr);gap:14px}.reading{padding:20px}}
 @media(min-width:651px) and (max-width:900px){.personal-grid{grid-template-columns:1fr;gap:40px}.book{grid-template-columns:100px minmax(0,1fr)}.photo-grid{max-width:620px}}
+
+/* A secret track for anyone who finds the groove. */
+.kit-encore{margin-top:24px;padding:24px;border:2px solid #e32129;background:#181818;color:#f5f3ed}
+.kit-encore[hidden]{display:none}
+.encore-header{display:flex;justify-content:space-between;gap:20px;align-items:start;margin-bottom:20px}
+.encore-header h3{margin:10px 0 5px}.encore-header p{margin:0}
+.encore-header button{background:#e32129;color:white;border:0;padding:12px 16px;font:700 12px monospace;cursor:pointer}
+.encore-player iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.kit-encore a{color:inherit;text-decoration:underline}.kit-encore .small{margin-top:16px}
+@media(max-width:500px){.kit-encore{padding:16px}.encore-header{flex-direction:column}}
