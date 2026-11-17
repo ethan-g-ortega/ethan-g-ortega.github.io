@@ -40,3 +40,5 @@ body,.hero{background-color:#292929}header{border-bottom-color:#555}.brand{color
 .encore-player iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
 .kit-encore a{color:inherit;text-decoration:underline}.kit-encore .small{margin-top:16px}
 @media(max-width:500px){.kit-encore{padding:16px}.encore-header{flex-direction:column}}
+
+.secret-groove-hint{margin:0;padding:16px 24px;border-top:1px dashed #ffffff35;color:#ddd;font:13px/1.9 monospace}.secret-groove-hint>span:first-child{display:block;color:#fff;font-weight:700;letter-spacing:.08em}.groove-keys{display:inline-block;margin-top:8px}.groove-keys kbd{display:inline-block;padding:2px 7px;border:1px solid #ffffff50;border-bottom:2px solid #e32129;border-radius:3px;color:#fff;background:#222;font:inherit}
