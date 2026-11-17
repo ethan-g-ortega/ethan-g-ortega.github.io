@@ -7,8 +7,8 @@ window.SITE_CONTENT = {
   github: "https://github.com/ethan-g-ortega",
   linkedin: "",
   books: [
-    { title: "The shelf is taking shape", author: "Book notes coming soon", note: "" }
-    // Example: , { title: "Your book title", author: "Author name", note: "What stayed with you." }
+    { title: "Life 3.0", author: "Max Tegmark", cover: "media/life-3-0.png", note: "I read this when I was 15, fascinated by the world AI could bring. It’s the book that got me into computer science and software engineering." },
+    { title: "The Obstacle Is the Way", author: "Ryan Holiday", cover: "media/the-obstacle-is-the-way.png", note: "I read this when I was younger, and it became a pivotal book in my life. It taught me to turn failures and hardships into opportunities." }
   ],
   places: [
     { name: "Chiang Mai, Thailand — Sticky Falls", image: "media/travel-forest-original.jpeg", caption: "", orientation: "portrait" },

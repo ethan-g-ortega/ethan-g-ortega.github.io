@@ -19,7 +19,13 @@ function selectCareer(index, focus = false) {
 }
 content.career.forEach((c, i) => { const b = el('button', `${String(i+1).padStart(2,'0')}  ${c.company}`, 'trace-tab'); b.id = `career-${i}`; b.setAttribute('role','tab'); b.setAttribute('aria-controls','career-detail'); b.append(el('span','↗')); b.onclick = () => selectCareer(i); b.onkeydown = e => { let next = i; if(e.key==='ArrowDown'||e.key==='ArrowRight') next=(i+1)%content.career.length; else if(e.key==='ArrowUp'||e.key==='ArrowLeft') next=(i-1+content.career.length)%content.career.length; else if(e.key==='Home') next=0; else if(e.key==='End') next=content.career.length-1; else return; e.preventDefault(); selectCareer(next,true); }; tabs.append(b); });
 selectCareer(0);
-content.books.forEach((b,i) => { const row=el('div',undefined,'book'), details=el('div'); details.append(el('strong',b.title),el('p',b.author)); if(b.note) details.append(el('p',b.note)); row.append(el('span',String(i+1).padStart(2,'0'),'book-num'),details); document.querySelector('#books').append(row); });
+content.books.forEach((b,i) => {
+  const row=el('article',undefined,'book'), details=el('div',undefined,'book-details');
+  if(b.cover && safeURL(b.cover)){const img=el('img',undefined,'book-cover');img.src=safeURL(b.cover);img.alt=`${b.title} by ${b.author} — book cover`;img.loading='lazy';row.append(img);}
+  details.append(el('span',String(i+1).padStart(2,'0'),'book-num'),el('h4',b.title),el('p',b.author,'book-author'));
+  if(b.note) details.append(el('p',b.note,'book-note'));
+  row.append(details);document.querySelector('#books').append(row);
+});
 const gallery=el('div',undefined,'photo-grid');
 content.places.forEach(p => { const figure=el('figure',undefined,'photo'); if(p.image && safeURL(p.image)){ const img=el('img'); img.src=safeURL(p.image); img.alt=p.name; img.loading='lazy'; if(p.orientation==='sideways'){const frame=el('div',undefined,'photo-rotate-frame');frame.append(img);figure.append(frame);}else{figure.classList.add('photo-portrait');figure.append(img);} }else{const empty=el('div',undefined,'photo-empty'); empty.append(el('b','＋'),el('span','A moment to keep')); figure.append(empty);} figure.append(el('figcaption',p.caption ? `${p.name} / ${p.caption}` : p.name));gallery.append(figure); });
 document.querySelector('#places').append(gallery);
